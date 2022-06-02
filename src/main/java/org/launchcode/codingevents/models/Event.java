@@ -28,7 +28,7 @@ public class Event {
         nextId++;
     }
 
-    public Event(){}
+    public Event(){};
     public String getName() {
         return name;
     }
