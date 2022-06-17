@@ -4,7 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
+/**
+ * Created by Chris Bay
+ */
 @Entity
 public class EventCategory {
 
@@ -12,23 +16,14 @@ public class EventCategory {
     @GeneratedValue
     private int id;
 
-    @Size(min=3, max=50, message="Name must be between 3-50 characters")
+    @Size(min=3, message="Name must be at least 3 characters long")
     private String name;
 
-    public EventCategory(int id, String name){
-        this.id=id;
-        this.name=name;
+    public EventCategory(@Size(min = 3, message = "Name must be at least 3 characters long") String name) {
+        this.name = name;
     }
 
     public EventCategory() {}
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -36,5 +31,27 @@ public class EventCategory {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EventCategory that = (EventCategory) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

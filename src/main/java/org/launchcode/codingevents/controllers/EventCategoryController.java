@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
-
+@Controller
 @RequestMapping("eventCategories")
 public class EventCategoryController {
 
@@ -31,15 +31,15 @@ public class EventCategoryController {
         return "eventCategories/index";
     }
 
-    //lives at /event/create
-    @GetMapping()
+
+    @GetMapping("create")
     public String renderCreateEventCategoryForm(Model model){
         model.addAttribute("title", "Create Category");
         model.addAttribute(new EventCategory());
         return "eventCategories/create";
     }
 
-    // lives at /events/create
+
     @PostMapping("create")
     public String processCreateEventCategoryForm(@Valid @ModelAttribute EventCategory eventCategory, Errors errors, Model model) {
 
